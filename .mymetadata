@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Fixer"
+  id="myeclipse.1468126922539"
+  context-root="/Fixer"
+  j2ee-spec="6.0"
+  archive="Fixer.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="default" extends="json-default" >
+		<!--  -->
+		<action name="addorupdateUser" class="userAction" method="addorupdateUser">
+			<result name="success" type="json">
+				<param name="root">responseJson</param>
+			</result>
+		</action>
+		<action name="checkUser" class="userAction" method="checkUser">
+			<result name="success" type="json">
+				<param name="root">responseJson</param>
+			</result>
+			<result name="error" type="json">
+				<param name="root">responseJson</param>
+			</result>
+		</action>
+		<action name="getUserDetail" class="userAction" method="getUserDetail">
+			<result name="success" type="json">
+				<param name="root">responseJson</param>
+			</result>
+			<result name="error" type="json">
+				<param name="root">responseJson</param>
+			</result>
+		</action>
+		<!--  -->
+		<action name="addorupdateFault" class="faultAction" method="addorupdateFault">
+			<result name="success" type="json">
+				<param name="root">responseJson</param>
+			</result>
+		</action>
+		
+		<action name="addorupdateOrder" class="orderAction" method="addorupdateOrder">
+			<result name="success" type="json">
+				<param name="root">responseJson</param>
+			</result>
+		</action>
+		<action name="getallOrder" class="orderAction" method="getallOrder">
+			<result name="success" type="json">
+				<param name="root">responseJson</param>
+			</result>
+		</action>
+	</package>
+	
+	
+</struts>    
