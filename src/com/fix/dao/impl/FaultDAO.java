@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 
 import com.fix.dao.IFaultDAO;
 import com.fix.model.Fault;
+import com.fix.model.Order;
 
 public class FaultDAO implements IFaultDAO {
 	private SessionFactory sessionFactory;
@@ -55,6 +56,18 @@ public class FaultDAO implements IFaultDAO {
 	public boolean delFaultById(int id) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public Fault getFaultByFaultId(String id) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.openSession();
+		Transaction ts=session.beginTransaction();
+		Query query=session.createQuery("from Fault where faultid='"+id+"'");
+		List<Fault> faults=query.list();
+		ts.commit();
+		session.close();
+		return faults.get(0);
 	}
 
 }

@@ -40,8 +40,8 @@ public class UserAction extends ActionSupport{
 	private String shopname="";
 	private String shoptype="";
 	private String address="";
-	private String phone="";
-	private int status=0;
+	private String shopphone="";
+
 	
 	public String getUserid() {
 		return userid;
@@ -104,19 +104,15 @@ public class UserAction extends ActionSupport{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
+	
 	 
+	public String getShopphone() {
+		return shopphone;
+	}
+	public void setShopphone(String shopphone) {
+		this.shopphone = shopphone;
+	}
+	
 	public void setnull(){
 		userid="";
 		username="";
@@ -128,8 +124,7 @@ public class UserAction extends ActionSupport{
 		shopname="";
 		shoptype="";
 		address="";
-		phone="";
-		status=0;
+		shopphone="";
 	}
 	
 	//用户添加
@@ -146,11 +141,10 @@ public class UserAction extends ActionSupport{
 		 user.setPhonenumber(phonenumber);
 		 userInfo.setUsername(username);
 		 userInfo.setAddress(address);
-		 userInfo.setPhone(phone);
+		 userInfo.setShopphone(shopphone);
 		 userInfo.setShoplogo(shoplogo);
 		 userInfo.setShopname(shopname);
 		 userInfo.setShoptype(shoptype);
-		 userInfo.setStatus(status);
 		 userInfo.setUser(user);
 		 user.setUserInfo(userInfo);
 		 user.setToken(getrandomtoken());
@@ -204,6 +198,7 @@ public class UserAction extends ActionSupport{
 			result successResult=new result("1", null, "登录成功");
 			map.put("result", successResult);
 			map.put("token", loginUser.getToken());
+			map.put("userid", loginUser.getUserid());
 			this.setResponseJson(map);
 			setnull();
 			return SUCCESS;
@@ -233,8 +228,7 @@ public class UserAction extends ActionSupport{
 			loginUserInfo.setShopname(loginUser.getUserInfo().getShopname());
 			loginUserInfo.setShoptype(loginUser.getUserInfo().getShoptype());
 			loginUserInfo.setAddress(loginUser.getUserInfo().getAddress());
-			loginUserInfo.setPhone(loginUser.getUserInfo().getPhone());
-			loginUserInfo.setStatus(loginUser.getUserInfo().getStatus());
+			loginUserInfo.setShopphone(loginUser.getUserInfo().getShopphone());
 			map.put("userinfo", loginUserInfo);
 			this.setResponseJson(map);
 			setnull();

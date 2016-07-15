@@ -10,4 +10,6 @@ public interface IFaultDAO {
 	public List getallFault();
 	public Fault editFaultById(int id);
 	public boolean delFaultById(int id);
+	
+	public Fault getFaultByFaultId(String id);
 }

@@ -12,10 +12,12 @@ public class Order implements java.io.Serializable {
 	private String orderstate;
 	private String orderrepairer;
 	private String orderrepairphone;
+	private String orderrepairid;
 	private String faultid;
-	private String orderfrom;
+	private String faultowner;
 	private String faultphone;
 	private String faultname;
+	private String faultownerid;
 
 	// Constructors
 
@@ -25,15 +27,18 @@ public class Order implements java.io.Serializable {
 
 	/** full constructor */
 	public Order(String orderstate, String orderrepairer,
-			String orderrepairphone, String faultid, String orderfrom,
-			String faultphone, String faultname) {
+			String orderrepairphone, String orderrepairid, String faultid,
+			String faultowner, String faultphone, String faultname,
+			String faultownerid) {
 		this.orderstate = orderstate;
 		this.orderrepairer = orderrepairer;
 		this.orderrepairphone = orderrepairphone;
+		this.orderrepairid = orderrepairid;
 		this.faultid = faultid;
-		this.orderfrom = orderfrom;
+		this.faultowner = faultowner;
 		this.faultphone = faultphone;
 		this.faultname = faultname;
+		this.faultownerid = faultownerid;
 	}
 
 	// Property accessors
@@ -70,6 +75,14 @@ public class Order implements java.io.Serializable {
 		this.orderrepairphone = orderrepairphone;
 	}
 
+	public String getOrderrepairid() {
+		return this.orderrepairid;
+	}
+
+	public void setOrderrepairid(String orderrepairid) {
+		this.orderrepairid = orderrepairid;
+	}
+
 	public String getFaultid() {
 		return this.faultid;
 	}
@@ -78,12 +91,12 @@ public class Order implements java.io.Serializable {
 		this.faultid = faultid;
 	}
 
-	public String getOrderfrom() {
-		return this.orderfrom;
+	public String getFaultowner() {
+		return this.faultowner;
 	}
 
-	public void setOrderfrom(String orderfrom) {
-		this.orderfrom = orderfrom;
+	public void setFaultowner(String faultowner) {
+		this.faultowner = faultowner;
 	}
 
 	public String getFaultphone() {
@@ -100,6 +113,14 @@ public class Order implements java.io.Serializable {
 
 	public void setFaultname(String faultname) {
 		this.faultname = faultname;
+	}
+
+	public String getFaultownerid() {
+		return this.faultownerid;
+	}
+
+	public void setFaultownerid(String faultownerid) {
+		this.faultownerid = faultownerid;
 	}
 
 }

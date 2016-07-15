@@ -1,6 +1,7 @@
 package com.fix.action;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.fix.model.Fault;
@@ -22,6 +23,9 @@ public class FaultAction extends ActionSupport{
 	private String phonenumber="";
 	private String desc="";
 	private String name="";
+	private String faultownerid="";
+	private String pictures="";
+	
 	
 	public Map getResponseJson() {
 		return responseJson;
@@ -91,6 +95,20 @@ public class FaultAction extends ActionSupport{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getFaultownerid() {
+		return faultownerid;
+	}
+	public void setFaultownerid(String faultownerid) {
+		this.faultownerid = faultownerid;
+	}
+	
+	public String getPictures() {
+		return pictures;
+	}
+	public void setPictures(String pictures) {
+		this.pictures = pictures;
+	}
 	public void setnull(){
 		faultid="";
 		title="";
@@ -100,7 +118,10 @@ public class FaultAction extends ActionSupport{
 		location="";
 		desc="";
 		name="";
+		faultownerid="";
+		pictures="";
 	}
+	//添加或者更新故障信息
 	public String addorupdateFault(){
 		Fault fault=new Fault();
 		fault.setFaultcontent(content);
@@ -110,15 +131,18 @@ public class FaultAction extends ActionSupport{
 		fault.setFaulttitle(title);
 		fault.setFaultphone(phonenumber);
 		fault.setFaultowner(name);
+		fault.setFaultownerid(faultownerid);
+		fault.setFaultpictures(pictures);
 		Map<String, Object> map = new HashMap<String, Object>();  
 		if (faultService.addorupdateFault(fault)) {
 			//生成订单并插入订单表,返回订单号
 			Order initialorder=new Order();
 			initialorder.setFaultid(fault.getFaultid());
 			initialorder.setFaultname(fault.getFaulttitle());
-			initialorder.setOrderstate("等待安排任务");
+			initialorder.setOrderstate("0");
 			initialorder.setFaultphone(fault.getFaultphone());
-			initialorder.setOrderfrom(fault.getFaultowner());
+			initialorder.setFaultowner(fault.getFaultowner());
+			initialorder.setFaultownerid(fault.getFaultownerid());
 			orderService.addorupdateOrder(initialorder);
 			map.put("orderid", initialorder.getOrderid());
 			result successResult=new result("1", null, "报障成功");
@@ -136,5 +160,17 @@ public class FaultAction extends ActionSupport{
 			return ERROR;
 		}
 	
+	}
+	
+	//根据faultid查询故障详细信息
+	public String getFaultByFaultId(){
+		Fault fault=faultService.getFaultByFaultId(faultid);
+		Map<String, Object> map = new HashMap<String, Object>();  
+		result successResult=new result("1", null, "查询成功");
+		map.put("result", successResult);
+		map.put("fault", fault);
+		this.setResponseJson(map);
+		setnull();
+		return SUCCESS;
 	}
 }

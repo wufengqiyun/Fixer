@@ -12,9 +12,9 @@ public class User implements java.io.Serializable {
 	private String username;
 	private String userpassword;
 	private String role;
-	private UserInfo userInfo;
 	private String phonenumber;
 	private String token;
+	private UserInfo userInfo;
 
 	// Constructors
 
@@ -22,18 +22,15 @@ public class User implements java.io.Serializable {
 	public User() {
 	}
 
-	/** minimal constructor */
-	public User(String userid) {
-		this.userid = userid;
-	}
-
 	/** full constructor */
-	public User(String userid, String username, String userpassword, String role,String phonenumber) {
-		this.userid = userid;
+	public User(String username, String userpassword, String role,
+			String phonenumber, String token, UserInfo userInfo) {
 		this.username = username;
 		this.userpassword = userpassword;
 		this.role = role;
 		this.phonenumber = phonenumber;
+		this.token = token;
+		this.userInfo = userInfo;
 	}
 
 	// Property accessors
@@ -70,16 +67,8 @@ public class User implements java.io.Serializable {
 		this.role = role;
 	}
 
-	public UserInfo getUserInfo() {
-		return userInfo;
-	}
-
-	public void setUserInfo(UserInfo userInfo) {
-		this.userInfo = userInfo;
-	}
-
 	public String getPhonenumber() {
-		return phonenumber;
+		return this.phonenumber;
 	}
 
 	public void setPhonenumber(String phonenumber) {
@@ -87,11 +76,19 @@ public class User implements java.io.Serializable {
 	}
 
 	public String getToken() {
-		return token;
+		return this.token;
 	}
 
 	public void setToken(String token) {
 		this.token = token;
 	}
-	
+
+	public UserInfo getUserInfo() {
+		return this.userInfo;
+	}
+
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
+
 }

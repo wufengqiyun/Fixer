@@ -43,10 +43,10 @@ public class UserDAO implements IUserDAO{
 		Transaction ts=session.beginTransaction();
 		Query query=session.createQuery("from User where userpassword='"+user.getUserpassword()+"' and phonenumber='"+user.getPhonenumber()+"' ");
 		List userList=query.list();
-		User user1=new User();
 		ts.commit();
 		session.close();
 		if (userList.size()!=0) {
+			User user1=new User();
 			user1=(User) userList.get(0);
 			return user1;
 		}

@@ -1,6 +1,5 @@
 package com.fix.action;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +16,13 @@ public class OrderAction extends ActionSupport{
 	private String state="";
 	private String repairer="";
 	private String repairphone="";
+	private String repairid="";
 	private String faultid="";
 	private String faultname=""; //故障名
-	private String orderfrom=""; //提交故障人
+	private String faultowner=""; //提交故障人
+	private String faultownerid="";//提交人id
 	private String faultphone=""; //提交人电话
+//	private String userid=""; 
 	
 	public IOrderService getOrderService() {
 		return orderService;
@@ -58,6 +60,13 @@ public class OrderAction extends ActionSupport{
 	public void setRepairphone(String repairphone) {
 		this.repairphone = repairphone;
 	}
+	
+	public String getRepairid() {
+		return repairid;
+	}
+	public void setRepairid(String repairid) {
+		this.repairid = repairid;
+	}
 	public String getFaultid() {
 		return faultid;
 	}
@@ -70,11 +79,18 @@ public class OrderAction extends ActionSupport{
 	public void setFaultname(String faultname) {
 		this.faultname = faultname;
 	}
-	public String getOrderfrom() {
-		return orderfrom;
+	public String getFaultowner() {
+		return faultowner;
 	}
-	public void setOrderfrom(String orderfrom) {
-		this.orderfrom = orderfrom;
+	public void setFaultowner(String faultowner) {
+		this.faultowner = faultowner;
+	}
+	
+	public String getFaultownerid() {
+		return faultownerid;
+	}
+	public void setFaultownerid(String faultownerid) {
+		this.faultownerid = faultownerid;
 	}
 	public String getFaultphone() {
 		return faultphone;
@@ -83,52 +99,102 @@ public class OrderAction extends ActionSupport{
 		this.faultphone = faultphone;
 	}
 
+	
+//	public String getUserid() {
+//		return userid;
+//	}
+//	public void setUserid(String userid) {
+//		this.userid = userid;
+//	}
+	
 	public void setnull(){
 		faultid="";
 		repairer="";
 		repairphone="";
+		repairid="";
 		orderid="";
 		state="";
 		faultname="";
-		orderfrom="";
+		faultowner="";
 		faultphone="";
+		faultownerid="";
 	}
-	
+	//添加或修改订单
 	public String addorupdateOrder() {
 		Order order=new Order();
 		order.setOrderstate(state);
+		order.setOrderid(orderid);
+		order.setOrderrepairer(repairer);
+		order.setOrderrepairphone(repairphone);
+		order.setOrderrepairid(repairid);
 		Map<String, Object> map = new HashMap<String, Object>();  
 		if (orderService.addorupdateOrder(order)) {
 			map.put("orderid", order.getOrderid());
-			result successResult=new result("1", null, "dingdan成功");
+			result successResult=new result("1", null, "下订单成功");
 			map.put("result", successResult);
 			this.setResponseJson(map);
 			setnull();
 			return SUCCESS;
 		}
 		else {
-			result successResult=new result("0","dingdan失败", null);
+			result successResult=new result("0","下订单失败", null);
 			map.put("result", successResult);
 			this.setResponseJson(map);
 			setnull();
 			return ERROR;
 		}
 	}
-	
+	//获取所有订单
 	public String getallOrder(){
 		List<Order> orderlisList=orderService.getallOrder();
 		Map<String, Object> map = new HashMap<String, Object>();  
-//        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();  
-//        for(int i=0;i<3;i++){  
-//            Map<String, Object> m = new HashMap<String, Object>();  
-//            m.put("id", i);  
-//            m.put("name", "Mic"+i);  
-//            list.add(m);  
-//        }  
 		result successResult=new result("1", null, "查询成功");
 		map.put("result", successResult);
 		map.put("orderlist", orderlisList);
 		this.setResponseJson(map);
 		return SUCCESS;
 	}
+	
+	//通过故障提交人id进行查询
+	public String getOrderByownerId(){
+		List<Order> orderlisList=orderService.getOrderByownerId(faultownerid);
+		Map<String, Object> map = new HashMap<String, Object>();  
+		result successResult=new result("1", null, "查询成功");
+		map.put("result", successResult);
+		map.put("orderlist", orderlisList);
+		this.setResponseJson(map);
+		setnull();
+		return SUCCESS;
+	}
+	//通过维修人id进行查询
+		public String getOrderByrepairerId(){
+			List<Order> orderlisList=orderService.getOrderByrepairerId(repairid);
+			Map<String, Object> map = new HashMap<String, Object>();  
+			result successResult=new result("1", null, "查询成功");
+			map.put("result", successResult);
+			map.put("orderlist", orderlisList);
+			this.setResponseJson(map);
+			setnull();
+			return SUCCESS;
+		}
+	//修改订单的状态
+		public String updateState(){
+			Order orderupdate=orderService.getOrderByfaultId(faultid);
+			orderupdate.setOrderstate(state);
+			Map<String, Object> map = new HashMap<String, Object>();  
+			if (orderService.addorupdateOrder(orderupdate)) {
+				result successResult=new result("1", null, "修改状态成功");
+				map.put("result", successResult);
+				this.setResponseJson(map);
+				setnull();
+				return SUCCESS;
+			}
+			else {
+				result successResult=new result("0","修改状态失败", null);
+				map.put("result", successResult);
+				this.setResponseJson(map);
+				setnull();
+				return ERROR;
+			}
+		}
 }

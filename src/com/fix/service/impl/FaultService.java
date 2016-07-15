@@ -40,4 +40,10 @@ public class FaultService implements IFaultService {
 		return false;
 	}
 
+	@Override
+	public Fault getFaultByFaultId(String id) {
+		// TODO Auto-generated method stub
+		return faultDAO.getFaultByFaultId(id);
+	}
+
 }

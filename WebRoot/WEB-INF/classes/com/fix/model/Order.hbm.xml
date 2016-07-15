@@ -19,17 +19,23 @@
         <property name="orderrepairphone" type="java.lang.String">
             <column name="orderrepairphone" length="45" />
         </property>
+        <property name="orderrepairid" type="java.lang.String">
+            <column name="orderrepairid" length="45" />
+        </property>
         <property name="faultid" type="java.lang.String">
             <column name="faultid" length="200" />
         </property>
-        <property name="orderfrom" type="java.lang.String">
-            <column name="orderfrom" length="45" />
+        <property name="faultowner" type="java.lang.String">
+            <column name="faultowner" length="45" />
         </property>
         <property name="faultphone" type="java.lang.String">
             <column name="faultphone" length="45" />
         </property>
         <property name="faultname" type="java.lang.String">
             <column name="faultname" length="45" />
+        </property>
+        <property name="faultownerid" type="java.lang.String">
+            <column name="faultownerid" length="200" />
         </property>
     </class>
 </hibernate-mapping>

@@ -9,14 +9,13 @@ public class UserInfo implements java.io.Serializable {
 	// Fields
 
 	private String userid;
+	private User user;
 	private String username;
 	private String shoplogo;
 	private String shopname;
 	private String shoptype;
 	private String address;
-	private String phone;
-	private Integer status;
-	private User user;
+	private String shopphone;
 
 	// Constructors
 
@@ -25,22 +24,20 @@ public class UserInfo implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public UserInfo(String userid) {
-		this.userid = userid;
+	public UserInfo(User user) {
+		this.user = user;
 	}
 
 	/** full constructor */
-	public UserInfo(String userid, String username, String shoplogo,
-			String shopname, String shoptype, String address, String phone,
-			Integer status) {
-		this.userid = userid;
+	public UserInfo(User user, String username, String shoplogo,
+			String shopname, String shoptype, String address, String shopphone) {
+		this.user = user;
 		this.username = username;
 		this.shoplogo = shoplogo;
 		this.shopname = shopname;
 		this.shoptype = shoptype;
 		this.address = address;
-		this.phone = phone;
-		this.status = status;
+		this.shopphone = shopphone;
 	}
 
 	// Property accessors
@@ -51,6 +48,14 @@ public class UserInfo implements java.io.Serializable {
 
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getUsername() {
@@ -93,28 +98,12 @@ public class UserInfo implements java.io.Serializable {
 		this.address = address;
 	}
 
-	public String getPhone() {
-		return this.phone;
+	public String getShopphone() {
+		return this.shopphone;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public Integer getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
+	public void setShopphone(String shopphone) {
+		this.shopphone = shopphone;
 	}
 
 }

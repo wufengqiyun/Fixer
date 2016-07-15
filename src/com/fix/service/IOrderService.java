@@ -9,4 +9,8 @@ public interface IOrderService {
 	public List<Order> getallOrder();
 	public Order editOrderById(int id);
 	public boolean delOrderById(int id);
+	
+	public List<Order> getOrderByownerId(String id);
+	public List<Order> getOrderByrepairerId(String id);
+	public Order getOrderByfaultId(String id);
 }

@@ -41,4 +41,22 @@ public class OrderService implements IOrderService {
 		return false;
 	}
 
+	@Override
+	public List<Order> getOrderByownerId(String id) {
+		// TODO Auto-generated method stub
+		return orderDAO.getOrderByownerId(id);
+	}
+
+	@Override
+	public List<Order> getOrderByrepairerId(String id) {
+		// TODO Auto-generated method stub
+		return orderDAO.getOrderByrepairerId(id);
+	}
+
+	@Override
+	public Order getOrderByfaultId(String id) {
+		// TODO Auto-generated method stub
+		return orderDAO.getOrderByfaultId(id);
+	}
+
 }

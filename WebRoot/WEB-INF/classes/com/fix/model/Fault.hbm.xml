@@ -31,5 +31,11 @@
         <property name="faultowner" type="java.lang.String">
             <column name="faultowner" length="45" />
         </property>
+        <property name="faultownerid" type="java.lang.String">
+            <column name="faultownerid" length="200" />
+        </property>
+        <property name="faultpictures" type="java.lang.String">
+            <column name="faultpictures" length="200" />
+        </property>
     </class>
 </hibernate-mapping>

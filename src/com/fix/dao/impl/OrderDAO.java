@@ -53,4 +53,40 @@ public class OrderDAO implements IOrderDAO {
 		return false;
 	}
 
+	@Override
+	public List<Order> getOrderByownerId(String id) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.openSession();
+		Transaction ts=session.beginTransaction();
+		Query query=session.createQuery("from Order where faultownerid='"+id+"'");
+		List<Order> orders=query.list();
+		ts.commit();
+		session.close();
+		return orders;
+	}
+
+	@Override
+	public List<Order> getOrderByrepairerId(String id) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.openSession();
+		Transaction ts=session.beginTransaction();
+		Query query=session.createQuery("from Order where orderrepairid='"+id+"'");
+		List<Order> orders=query.list();
+		ts.commit();
+		session.close();
+		return orders;
+	}
+
+	@Override
+	public Order getOrderByfaultId(String id) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.openSession();
+		Transaction ts=session.beginTransaction();
+		Query query=session.createQuery("from Order where faultid='"+id+"'");
+		List<Order> orders=query.list();
+		ts.commit();
+		session.close();
+		return orders.get(0);
+	}
+
 }

@@ -16,6 +16,8 @@ public class Fault implements java.io.Serializable {
 	private String faultphone;
 	private String faultdesc;
 	private String faultowner;
+	private String faultownerid;
+	private String faultpictures;
 
 	// Constructors
 
@@ -26,7 +28,7 @@ public class Fault implements java.io.Serializable {
 	/** full constructor */
 	public Fault(String faulttitle, String faultcontent, String faulttime,
 			String faultlocation, String faultphone, String faultdesc,
-			String faultowner) {
+			String faultowner, String faultownerid, String faultpictures) {
 		this.faulttitle = faulttitle;
 		this.faultcontent = faultcontent;
 		this.faulttime = faulttime;
@@ -34,6 +36,8 @@ public class Fault implements java.io.Serializable {
 		this.faultphone = faultphone;
 		this.faultdesc = faultdesc;
 		this.faultowner = faultowner;
+		this.faultownerid = faultownerid;
+		this.faultpictures = faultpictures;
 	}
 
 	// Property accessors
@@ -100,6 +104,22 @@ public class Fault implements java.io.Serializable {
 
 	public void setFaultowner(String faultowner) {
 		this.faultowner = faultowner;
+	}
+
+	public String getFaultownerid() {
+		return this.faultownerid;
+	}
+
+	public void setFaultownerid(String faultownerid) {
+		this.faultownerid = faultownerid;
+	}
+
+	public String getFaultpictures() {
+		return this.faultpictures;
+	}
+
+	public void setFaultpictures(String faultpictures) {
+		this.faultpictures = faultpictures;
 	}
 
 }
