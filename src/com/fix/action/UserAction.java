@@ -1,13 +1,16 @@
 package com.fix.action;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.fix.dao.impl.UserDAO;
 import com.fix.model.User;
 import com.fix.model.UserInfo;
 import com.fix.service.IUserService;
 import com.fix.util.result;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class UserAction extends ActionSupport{
@@ -186,8 +189,8 @@ public class UserAction extends ActionSupport{
 //		usertest.setUsername(username);
 		 usertest.setUserpassword(userpassword);
 		 usertest.setPhonenumber(phonenumber);
-		 System.out.println(phonenumber);
-		 System.out.println(usertest.getPhonenumber());
+//		 System.out.println(phonenumber);
+//		 System.out.println(usertest.getPhonenumber());
 		 User loginUser=userService.checkUser(usertest);
 		 Map<String, Object> map=new HashMap<String, Object>();	
 		 if (loginUser!=null) {
@@ -253,4 +256,20 @@ public class UserAction extends ActionSupport{
 			}
 			return sb.toString();
 	}
+	 
+	 public String getallRepairer(){
+		 List repairs=userService.getallRepairer();
+		 Map request=(Map) ActionContext.getContext().get("request");
+		 request.put("repairers", repairs);
+		 return SUCCESS;
+	 }
+	 
+	 public String getUserById(){
+		 User user=userService.getUserById("1");
+		 Map<String, Object> map=new HashMap<String, Object>();	
+		 map.put("user", user);
+		 this.setResponseJson(map);
+		 setnull();
+		 return SUCCESS;
+	 }
 }

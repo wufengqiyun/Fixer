@@ -13,5 +13,6 @@ public interface IOrderDAO {
 		
 		public List<Order> getOrderByownerId(String id);
 		public List<Order> getOrderByrepairerId(String id);
+		public List<Order> getOrderBystate(String state);
 		public Order getOrderByfaultId(String id);
 	}

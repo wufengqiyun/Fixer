@@ -2,7 +2,7 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<package name="default" extends="json-default" >
-		<!--  -->
+		<!-- 用户相关 -->
 		<action name="addorupdateUser" class="userAction" method="addorupdateUser">
 			<result name="success" type="json">
 				<param name="root">responseJson</param>
@@ -24,13 +24,23 @@
 				<param name="root">responseJson</param>
 			</result>
 		</action>
-		<!--  -->
+		<action name="getUserById" class="userAction" method="getUserById">
+			<result name="success" type="json">
+				<param name="root">responseJson</param>
+			</result>
+		</action>
+		<!-- 故障相关 -->
 		<action name="addorupdateFault" class="faultAction" method="addorupdateFault">
 			<result name="success" type="json">
 				<param name="root">responseJson</param>
 			</result>
 		</action>
-		
+		<action name="getFaultByFaultId" class="faultAction" method="getFaultByFaultId">
+			<result name="success" type="json">
+				<param name="root">responseJson</param>
+			</result>
+		</action>
+		<!-- 订单相关 -->
 		<action name="addorupdateOrder" class="orderAction" method="addorupdateOrder">
 			<result name="success" type="json">
 				<param name="root">responseJson</param>
@@ -60,12 +70,25 @@
 			</result>
 		</action>
 		
-		<action name="getFaultByFaultId" class="faultAction" method="getFaultByFaultId">
-			<result name="success" type="json">
-				<param name="root">responseJson</param>
-			</result>
-		</action>
+		
 	</package>
-	
-	
+	<!-- 网页 -->
+	<package name="background" extends="struts-default">
+		<action name="getOrderForDisplay" class="orderAction" method="BgetOrderForDisplay">
+			<result name="success">/OrderDisplay.jsp</result>
+		</action>
+		<action name="getrepairingOrder" class="orderAction" method="BgetrepairingOrder">
+			<result name="success">/RepairingOrder.jsp</result>
+		</action>
+		<action name="BgetFaultByFaultId" class="faultAction" method="BgetFaultByFaultId">
+			<result name="success">/OrderEdit.jsp</result>
+		</action>
+		<action name="getallRepairer" class="userAction" method="getallRepairer">
+			<result name="success">/index.jsp</result>
+		</action>
+		<action name="chooseRepairer" class="orderAction" method="BchooseRepairer">
+			<result name="success">/index.jsp</result>
+		</action>
+		
+	</package>
 </struts>    

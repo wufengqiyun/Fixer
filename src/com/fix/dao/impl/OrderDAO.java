@@ -89,4 +89,16 @@ public class OrderDAO implements IOrderDAO {
 		return orders.get(0);
 	}
 
+	@Override
+	public List<Order> getOrderBystate(String state) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.openSession();
+		Transaction ts=session.beginTransaction();
+		Query query=session.createQuery("from Order where orderstate='"+state+"'");
+		List<Order> orders=query.list();
+		ts.commit();
+		session.close();
+		return orders;
+	}
+
 }

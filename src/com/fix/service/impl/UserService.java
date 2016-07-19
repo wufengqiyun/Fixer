@@ -1,5 +1,7 @@
 package com.fix.service.impl;
 
+import java.util.List;
+
 import com.fix.dao.IUserDAO;
 import com.fix.model.User;
 import com.fix.model.UserInfo;
@@ -38,6 +40,18 @@ public class UserService implements IUserService {
 	public boolean addToken(User user) {
 		// TODO Auto-generated method stub
 		return userDAO.addToken(user);
+	}
+
+	@Override
+	public List getallRepairer() {
+		// TODO Auto-generated method stub
+		return userDAO.getallRepairer();
+	}
+
+	@Override
+	public User getUserById(String id) {
+		// TODO Auto-generated method stub
+		return userDAO.getUserById(id);
 	}
 
 }

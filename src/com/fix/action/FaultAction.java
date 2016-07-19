@@ -9,6 +9,7 @@ import com.fix.model.Order;
 import com.fix.service.IFaultService;
 import com.fix.service.IOrderService;
 import com.fix.util.result;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class FaultAction extends ActionSupport{
@@ -171,6 +172,13 @@ public class FaultAction extends ActionSupport{
 		map.put("fault", fault);
 		this.setResponseJson(map);
 		setnull();
+		return SUCCESS;
+	}
+	
+	public String BgetFaultByFaultId(){
+		Fault fault=faultService.getFaultByFaultId(faultid);
+		Map request=(Map) ActionContext.getContext().get("request");
+		request.put("faultdisplay",fault);
 		return SUCCESS;
 	}
 }

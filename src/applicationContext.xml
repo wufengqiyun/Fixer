@@ -69,5 +69,6 @@
 		</bean>
 		<bean id="orderAction" class="com.fix.action.OrderAction" >
 			<property name="orderService" ref="orderService"></property>
+			<property name="userService" ref="userService"></property>
 		</bean>
 		</beans>

@@ -59,4 +59,10 @@ public class OrderService implements IOrderService {
 		return orderDAO.getOrderByfaultId(id);
 	}
 
+	@Override
+	public List<Order> getOrderByState(String state) {
+		// TODO Auto-generated method stub
+		return orderDAO.getOrderBystate(state);
+	}
+
 }

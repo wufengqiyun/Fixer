@@ -5,12 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import com.fix.model.Order;
+import com.fix.model.User;
 import com.fix.service.IOrderService;
+import com.fix.service.IUserService;
 import com.fix.util.result;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class OrderAction extends ActionSupport{
 	private IOrderService orderService;
+	private IUserService userService;
 	public Map responseJson;
 	private String orderid="";
 	private String state="";
@@ -29,6 +33,13 @@ public class OrderAction extends ActionSupport{
 	}
 	public void setOrderService(IOrderService orderService) {
 		this.orderService = orderService;
+	}
+	
+	public IUserService getUserService() {
+		return userService;
+	}
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
 	}
 	public Map getResponseJson() {
 		return responseJson;
@@ -196,5 +207,36 @@ public class OrderAction extends ActionSupport{
 				setnull();
 				return ERROR;
 			}
+		}
+		
+		public String BgetOrderForDisplay(){
+			List orders=orderService.getOrderByState("0");
+			Map request=(Map) ActionContext.getContext().get("request");
+			request.put("orders", orders);
+			setnull();
+			return SUCCESS;
+		}
+		
+		public String BgetrepairingOrder(){
+			List orders=orderService.getOrderByState("1");
+			Map request=(Map) ActionContext.getContext().get("request");
+			request.put("orders", orders);
+			setnull();
+			return SUCCESS;
+		}
+		
+		public String BchooseRepairer(){		
+			//根据faultid得到order对象
+			Order orderchange=orderService.getOrderByfaultId(faultid);
+			//根据repairid得到名称和电话
+			User repairer=userService.getUserById(repairid);
+			//update信息
+			orderchange.setOrderrepairid(repairid);
+			orderchange.setOrderrepairer(repairer.getUsername());
+			orderchange.setOrderrepairphone(repairer.getPhonenumber());
+			orderchange.setOrderstate("1");
+			orderService.addorupdateOrder(orderchange);
+			setnull();
+			return SUCCESS;
 		}
 }

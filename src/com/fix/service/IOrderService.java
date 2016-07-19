@@ -12,5 +12,6 @@ public interface IOrderService {
 	
 	public List<Order> getOrderByownerId(String id);
 	public List<Order> getOrderByrepairerId(String id);
+	public List<Order> getOrderByState(String state);
 	public Order getOrderByfaultId(String id);
 }

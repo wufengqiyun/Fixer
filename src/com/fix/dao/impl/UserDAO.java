@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.fix.dao.IUserDAO;
+import com.fix.model.Order;
 import com.fix.model.User;
 import com.fix.model.UserInfo;
 
@@ -79,5 +80,29 @@ public class UserDAO implements IUserDAO{
 		ts.commit();
 		session.close();
 		return true;
+	}
+
+	@Override
+	public List getallRepairer() {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.openSession();
+		Transaction ts=session.beginTransaction();
+		Query query=session.createQuery("from User where role='"+2+"' ");
+		List repairers=query.list();
+		ts.commit();
+		session.close();
+		return repairers;
+	}
+
+	@Override
+	public User getUserById(String id) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.openSession();
+		Transaction ts=session.beginTransaction();
+		Query query=session.createQuery("from User where userid='"+id+"'");
+		List<User> users=query.list();
+		ts.commit();
+		session.close();
+		return users.get(0);
 	}
 }
