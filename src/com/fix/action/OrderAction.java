@@ -118,18 +118,7 @@ public class OrderAction extends ActionSupport{
 //		this.userid = userid;
 //	}
 	
-	public void setnull(){
-		faultid="";
-		repairer="";
-		repairphone="";
-		repairid="";
-		orderid="";
-		state="";
-		faultname="";
-		faultowner="";
-		faultphone="";
-		faultownerid="";
-	}
+	
 	//添加或修改订单
 	public String addorupdateOrder() {
 		Order order=new Order();
@@ -144,14 +133,12 @@ public class OrderAction extends ActionSupport{
 			result successResult=new result("1", null, "下订单成功");
 			map.put("result", successResult);
 			this.setResponseJson(map);
-			setnull();
 			return SUCCESS;
 		}
 		else {
 			result successResult=new result("0","下订单失败", null);
 			map.put("result", successResult);
 			this.setResponseJson(map);
-			setnull();
 			return ERROR;
 		}
 	}
@@ -174,7 +161,6 @@ public class OrderAction extends ActionSupport{
 		map.put("result", successResult);
 		map.put("orderlist", orderlisList);
 		this.setResponseJson(map);
-		setnull();
 		return SUCCESS;
 	}
 	//通过维修人id进行查询
@@ -185,7 +171,6 @@ public class OrderAction extends ActionSupport{
 			map.put("result", successResult);
 			map.put("orderlist", orderlisList);
 			this.setResponseJson(map);
-			setnull();
 			return SUCCESS;
 		}
 	//修改订单的状态
@@ -197,14 +182,12 @@ public class OrderAction extends ActionSupport{
 				result successResult=new result("1", null, "修改状态成功");
 				map.put("result", successResult);
 				this.setResponseJson(map);
-				setnull();
 				return SUCCESS;
 			}
 			else {
 				result successResult=new result("0","修改状态失败", null);
 				map.put("result", successResult);
 				this.setResponseJson(map);
-				setnull();
 				return ERROR;
 			}
 		}
@@ -213,7 +196,6 @@ public class OrderAction extends ActionSupport{
 			List orders=orderService.getOrderByState("0");
 			Map request=(Map) ActionContext.getContext().get("request");
 			request.put("orders", orders);
-			setnull();
 			return SUCCESS;
 		}
 		
@@ -221,14 +203,13 @@ public class OrderAction extends ActionSupport{
 			List orders=orderService.getOrderByState("1");
 			Map request=(Map) ActionContext.getContext().get("request");
 			request.put("orders", orders);
-			setnull();
 			return SUCCESS;
 		}
 		
 		public String BchooseRepairer(){		
 			//根据faultid得到order对象
 			Order orderchange=orderService.getOrderByfaultId(faultid);
-			//根据repairid得到名称和电话
+			//根据repairid得到名称和电话（以后改成从worker表获取）
 			User repairer=userService.getUserById(repairid);
 			//update信息
 			orderchange.setOrderrepairid(repairid);
@@ -236,7 +217,6 @@ public class OrderAction extends ActionSupport{
 			orderchange.setOrderrepairphone(repairer.getPhonenumber());
 			orderchange.setOrderstate("1");
 			orderService.addorupdateOrder(orderchange);
-			setnull();
 			return SUCCESS;
 		}
 }

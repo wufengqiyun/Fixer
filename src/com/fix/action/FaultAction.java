@@ -110,18 +110,7 @@ public class FaultAction extends ActionSupport{
 	public void setPictures(String pictures) {
 		this.pictures = pictures;
 	}
-	public void setnull(){
-		faultid="";
-		title="";
-		time="";
-		phonenumber="";
-		content="";
-		location="";
-		desc="";
-		name="";
-		faultownerid="";
-		pictures="";
-	}
+	
 	//添加或者更新故障信息
 	public String addorupdateFault(){
 		Fault fault=new Fault();
@@ -150,14 +139,12 @@ public class FaultAction extends ActionSupport{
 			map.put("result", successResult);
 			map.put("faultid", fault.getFaultid());
 			this.setResponseJson(map);
-			setnull();
 			return SUCCESS;
 		}
 		else {
 			result successResult=new result("0","报障失败", null);
 			map.put("result", successResult);
 			this.setResponseJson(map);
-			setnull();
 			return ERROR;
 		}
 	
@@ -171,7 +158,6 @@ public class FaultAction extends ActionSupport{
 		map.put("result", successResult);
 		map.put("fault", fault);
 		this.setResponseJson(map);
-		setnull();
 		return SUCCESS;
 	}
 	

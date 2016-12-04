@@ -88,8 +88,9 @@ public class UserDAO implements IUserDAO{
 		Session session=sessionFactory.openSession();
 		Transaction ts=session.beginTransaction();
 		Query query=session.createQuery("from User where role='"+2+"' ");
-		List repairers=query.list();
+	//	List repairers=query.list();
 		ts.commit();
+		List repairers=query.list();
 		session.close();
 		return repairers;
 	}

@@ -12,6 +12,7 @@ import com.fix.service.IUserService;
 import com.fix.util.result;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.qiniu.util.Auth;
 
 public class UserAction extends ActionSupport{
 	public static final String numberChar = "0123456789";
@@ -116,20 +117,6 @@ public class UserAction extends ActionSupport{
 		this.shopphone = shopphone;
 	}
 	
-	public void setnull(){
-		userid="";
-		username="";
-		userpassword="";
-		role="";
-		phonenumber="";
-		token="";
-		shoplogo="";
-		shopname="";
-		shoptype="";
-		address="";
-		shopphone="";
-	}
-	
 	//用户添加
 	 public String addorupdateUser() throws Exception{
 		 User user=new User();
@@ -165,11 +152,9 @@ public class UserAction extends ActionSupport{
 			 map.put("userid", user.getUserid());
 			 map.put("token", user.getToken());
 			 this.setResponseJson(map);
-			 setnull();
 			 return SUCCESS;
 		}
 		 else {
-			 setnull();
 			 return ERROR;
 		}
 	 }
@@ -203,14 +188,12 @@ public class UserAction extends ActionSupport{
 			map.put("token", loginUser.getToken());
 			map.put("userid", loginUser.getUserid());
 			this.setResponseJson(map);
-			setnull();
 			return SUCCESS;
 		 }
 		 else {
 			result successResult=new result("0","登录失败", null);
 			map.put("result", successResult);
 			this.setResponseJson(map);
-			setnull();
 			return ERROR;
 		 }
 	 }
@@ -234,14 +217,12 @@ public class UserAction extends ActionSupport{
 			loginUserInfo.setShopphone(loginUser.getUserInfo().getShopphone());
 			map.put("userinfo", loginUserInfo);
 			this.setResponseJson(map);
-			setnull();
 			return SUCCESS;
 		 }
 		 else {
 			result successResult=new result("0","登录信息无效，无法获取", null);
 			map.put("result", successResult);
 			this.setResponseJson(map);
-			setnull();
 			return ERROR;
 		 }
 	 }
@@ -269,7 +250,18 @@ public class UserAction extends ActionSupport{
 		 Map<String, Object> map=new HashMap<String, Object>();	
 		 map.put("user", user);
 		 this.setResponseJson(map);
-		 setnull();
+		 return SUCCESS;
+	 }
+	 
+	 public String uploadtoken(){
+		 String ACCESS_KEY="Pvhjp0qiiAEIE3ocHngIIKR0ITN4l9ddNkBfNzOv";
+		 String SECRET_KEY="NS9r4MTVoaUAziW85R4ZJ2TUMbjlMYzHVFPvDK1E";
+		 Auth auth=Auth.create(ACCESS_KEY, SECRET_KEY);
+		 String bucketname="fixer";
+		 String uploadtoken=auth.uploadToken(bucketname);
+		 Map<String, Object> map=new HashMap<String, Object>();	
+		 map.put("uploadtoken", uploadtoken);
+		 this.setResponseJson(map);
 		 return SUCCESS;
 	 }
 }

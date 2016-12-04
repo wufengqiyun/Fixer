@@ -3,7 +3,7 @@
 <struts>
 	<package name="default" extends="json-default" >
 		<!-- 用户相关 -->
-		<action name="addorupdateUser" class="userAction" method="addorupdateUser">
+		<action name="addorupdateUser" class="userAction" method="addorupdateUser" >
 			<result name="success" type="json">
 				<param name="root">responseJson</param>
 			</result>
@@ -69,7 +69,11 @@
 				<param name="root">responseJson</param>
 			</result>
 		</action>
-		
+		<action name="uploadtoken" class="userAction" method="uploadtoken">
+			<result name="success" type="json">
+				<param name="root">responseJson</param>
+			</result>
+		</action>
 		
 	</package>
 	<!-- 网页 -->

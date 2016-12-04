@@ -25,13 +25,12 @@
   		org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
   	</filter-class>
   </filter>
-  
-   <!-- Spring -->
   <filter-mapping>
   	<filter-name>struts2</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
   
+  <!-- Spring -->
   <context-param>
   	<param-name>contextConfigLocation</param-name>
 	<param-value>classpath:applicationContext.xml</param-value>
